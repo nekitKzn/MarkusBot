@@ -1,0 +1,15 @@
+bot: # t.me//golden_21_poizon_bot
+  name: Golden_21
+  token: 7179304806:AAFHfNGuBowBuQtXNpOLTgL9-vDlrCqWWx4
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/${DB_NAME:markusBotDb}
+    username: ${DB_USERNAME:nikita}
+    password: ${DB_PASSWORD:asdewf23d}
+  liquibase:
+    change-log: classpath:db/db.changelog-master.yml
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+    open-in-view: false

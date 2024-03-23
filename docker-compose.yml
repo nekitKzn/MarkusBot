@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  musicbot-prod:
+    image: nekitvp/marcus:1.0.0
+    restart: on-failure
+    depends_on:
+      - marcus-db
+    expose:
+      - "8080"
+    networks:
+      - marcus-prod
+    environment:
+      DB_HOST: marcus-db
+      DB_PORT: 5433
+      DB_NAME: markusBotDb
+      DB_USERNAME: postgres
+      DB_PASSWORD: HCJ01NlJYutvdZe6TFaFKhyNtb16UwEb
+      SPRING_PROFILES_ACTIVE: prod
+
+  marcus-db:
+    container_name: marcus-db
+    image: postgres:12-alpine
+    restart: on-failure
+    volumes:
+      - /pgdata-marcus/var/lib/postgresql/data
+    expose:
+      - "5433"
+    ports:
+      - "9735:5433"
+    networks:
+      - marcus-prod
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: HCJ01NlJYutvdZe6TFaFKhyNtb16UwEb
+      POSTGRES_DB: markusBotDb
+
+networks:
+  marcus-prod:
+
+volumes:
+  pgdata-marcus:
